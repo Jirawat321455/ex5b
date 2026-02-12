@@ -33,11 +33,9 @@
 	</div>
 	
 	<script>
-	    $(document).ready(function(){
-			$("button").click(function(){
-			   var t = Number($('#temp').val());//celsius
-			   var u = $('#unit').val();
-			   
+		
+		function validateTemperature(t) {
+ 
 			   if(isNaN(t)){
 					msg = "Please verify whether the temperature value is correct!!!";
 					alert(msg);
@@ -48,9 +46,11 @@
 					alert(msg);
 					return;
 			   }
-			   
-			   var t1;
-			   var u1;
+			   return null;
+		}
+		function validateTemperature(t,u) {
+			var result;
+			   var unitName;
 			   
 			   if(u == "F"){
 					t1 = t * (9/5) + 32;
@@ -62,6 +62,23 @@
 					t1 = t * (4/5);
                     u1 = "Réaumur";
 			   }
+			   return{
+				value: result,
+				unit: unitName
+			   };
+		}
+	    $(document).ready(function(){
+			$("button").click(function(){
+			   var t = Number($('#temp').val());//celsius
+			   var u = $('#unit').val();
+			  
+			   var errorMsg = validateTemperature(t);
+
+			   if(errorMsg){
+				alert(errorMsg);
+				return;
+			   }
+			   var output = convertTemperature(t,u);
 			   
 			   alert("Temperature is "+t1+" in "+u1);
 			});
