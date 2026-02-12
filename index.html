@@ -67,7 +67,20 @@
 				unit: unitName
 			   };
 		}
-	    
+	    $(document).ready(function(){
+			$("button").click(function(){
+			   var t = Number($('#temp').val());//celsius
+			   var u = $('#unit').val();
+			  
+			   var errorMsg = validateTemperature(t);
+
+			   if(!validate(t))return;
+
+			   var output = convertTemperature(t,u);
+			   
+			   alert("Temperature is "+result.t+" in "+result.u);
+			});
+		});
 	</script>
 </body>
 </html>
